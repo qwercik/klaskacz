@@ -1,13 +1,13 @@
 from aenum import MultiValueEnum
 
-class KlpParserReadFileError(Exception):
+class ReadFileError(Exception):
     pass
 
-class KlpParserEndOfInstructions(Exception):
+class EndOfInstructionsError(Exception):
     pass
 
-class KlpInstruction(MultiValueEnum):
-wholeNote = 0x01
+class Instruction(MultiValueEnum):
+    wholeNote = 0x01
     halfNote = 0x02
     quarterNote = 0x04
     eighthNote = 0x08
@@ -23,13 +23,13 @@ wholeNote = 0x01
     sixtyFourthRest = 0xE4
     voiceChange = tuple(range(0xC0, 0xD0))
 
-class KlpParser:
+class Parser:
     def __init__(self, filename):
         try:
             self.file = open(filename, 'rb')
             self.filename = filename
         except:
-            raise KlpParserReadFileError(f'Wystąpił problem z wczytaniem pliku {filename}. Upewnij się, że jest to poprawna nazwa pliku.')
+            raise ParserReadFileError(f'Wystąpił problem z wczytaniem pliku {filename}. Upewnij się, że jest to poprawna nazwa pliku.')
     
         self.bpm = int.from_bytes(self.file.read(2), byteorder='little')
 
@@ -38,10 +38,10 @@ class KlpParser:
         try:
             instructionByte = self.file.read(1)
         except:
-            raise KlpParserEndOfInstructions(f'Nie ma już więcej instrukcji w pliku {self.filename}')
+            raise ParserEndOfInstructionsError(f'Nie ma już więcej instrukcji w pliku {self.filename}')
 
-        instructionType = KlpInstruction(instructionByte)
-        parameter = instructionByte & 0xF if instructionType == KlpInstruction.voiceChange else None
+        instructionType = Instruction(instructionByte)
+        parameter = instructionByte & 0xF if instructionType == Instruction.voiceChange else None
 
         return (instructionType, parameter) 
 
