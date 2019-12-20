@@ -35,5 +35,6 @@ Pauzy - mają zapalony najwyższy bit:
 Zmiana dźwięku klaśnięcia - barwa zależy od konkretnego soundfonta. Jest 16 pozycji, do każdej z nich może zostać przypisany dźwięk o innej barwie.
 Aby wybrać dźwięk nr X (gdzie X jest cyfrą szesnastkową, czyli liczbą z przedziału od 0 do 15), podajemy bajt 0xCX.
 Przykładowo bajt 0xCB oznacza wybór dźwięku nr 0xB (czyli 11 w systemie dziesiętnym).
+Domyślnym dźwiękiem jest dźwięk nr 0 (0xC0).
 
 
