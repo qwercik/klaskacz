@@ -29,16 +29,16 @@ class Parser:
             self.file = open(filename, 'rb')
             self.filename = filename
         except:
-            raise ParserReadFileError(f'Wystąpił problem z wczytaniem pliku {filename}. Upewnij się, że jest to poprawna nazwa pliku.')
+            raise ReadFileError(f'Wystąpił problem z wczytaniem pliku {filename}. Upewnij się, że jest to poprawna nazwa pliku.')
     
         self.bpm = int.from_bytes(self.file.read(2), byteorder='little')
 
-    def readInstruction():
+    def readInstruction(self):
         instructionByte = None
         try:
-            instructionByte = self.file.read(1)
+            instructionByte = self.file.read(1)[0]
         except:
-            raise ParserEndOfInstructionsError(f'Nie ma już więcej instrukcji w pliku {self.filename}')
+            raise EndOfInstructionsError(f'Nie ma już więcej instrukcji w pliku {self.filename}')
 
         instructionType = Instruction(instructionByte)
         parameter = instructionByte & 0xF if instructionType == Instruction.voiceChange else None

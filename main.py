@@ -21,7 +21,7 @@ def main():
 
     except AppIncorrectUsageError as error:
         print(error)
-    except parser.ParserReadFileError:
+    except parser.ReadFileError:
         print(error)
     except parser.EndOfInstructionsError:
         pass
