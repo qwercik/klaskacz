@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
 import sys
+import time
 import parser
+import player
+import threading
 
 class AppIncorrectUsageError(Exception):
     pass
@@ -15,6 +18,7 @@ def main():
         klpParser = parser.Parser(klpFilename)
 
         print('BPM: ', klpParser.bpm)
+
         while True:
             instruction = klpParser.readInstruction()
             print('Instrukcja:', repr(instruction[0]), ('parametr: ' + str(instruction[1])) if not not instruction[1] else '')
