@@ -20,7 +20,7 @@ def printInstruction(instruction):
         print('Zmiana dźwięku na', parameter)
 
 def noteDuration(bpm, note):
-    return 60 / note / bpm
+    return 60 / (note / 4) / bpm
 
 def main():
     try:
@@ -29,7 +29,7 @@ def main():
 
         klpFilename = sys.argv[1]
         klpParser = parser.Parser(klpFilename)
-        klpParser.bpm = 35 # ZMIENIĆ
+        
         print(f'Odtwarzanie pliku {klpFilename}')
         print(f'Tempo: {klpParser.bpm} BPM')
         
