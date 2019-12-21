@@ -10,9 +10,14 @@ class AppIncorrectUsageError(Exception):
     pass
 
 def printInstruction(instruction):
-    instructionName = repr(instruction[0])
-    parameter = ',parametr: ' + str(instructionName[1]) if instruction[1] else ''
-    print(f'Instrukcja: {instructionName}{parameter}')
+    instructionType, parameter = instruction
+
+    if instructionType == parser.Instruction.note:
+        print('Nuta o wartości', parameter)
+    elif instructionType == parser.Instruction.rest:
+        print('Pauza o wartości', parameter)
+    else:
+        print('Zmiana dźwięku na', parameter)
 
 def main():
     try:
