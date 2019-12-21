@@ -10,3 +10,4 @@ class Sound:
     
     def stop(self):
         self.playback.stop()
+

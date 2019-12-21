@@ -9,6 +9,11 @@ import threading
 class AppIncorrectUsageError(Exception):
     pass
 
+def printInstruction(instruction):
+    instructionName = repr(instruction[0])
+    parameter = ',parametr: ' + str(instructionName[1]) if instruction[1] else ''
+    print(f'Instrukcja: {instructionName}{parameter}')
+
 def main():
     try:
         if len(sys.argv) != 2:
@@ -17,11 +22,13 @@ def main():
         klpFilename = sys.argv[1]
         klpParser = parser.Parser(klpFilename)
 
-        print('BPM: ', klpParser.bpm)
+        print(f'Odtwarzanie pliku {klpFilename}')
+        print(f'BPM (Ćwierćnuty na minutę): {klpParser.bpm}')
 
         while True:
             instruction = klpParser.readInstruction()
-            print('Instrukcja:', repr(instruction[0]), ('parametr: ' + str(instruction[1])) if not not instruction[1] else '')
+            printInstruction(instruction)
+
 
     except AppIncorrectUsageError as error:
         print(error)
