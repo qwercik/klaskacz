@@ -2,9 +2,9 @@
 
 import sys
 import time
-import parser
-import player
 import threading
+
+from app import parser, player
 
 class AppIncorrectUsageError(Exception):
     pass
