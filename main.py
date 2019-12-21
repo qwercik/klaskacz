@@ -28,7 +28,7 @@ def main():
         klpParser = parser.Parser(klpFilename)
 
         print(f'Odtwarzanie pliku {klpFilename}')
-        print(f'BPM (Ćwierćnuty na minutę): {klpParser.bpm}')
+        print(f'Tempo: {klpParser.bpm} BPM')
 
         while True:
             instruction = klpParser.readInstruction()
