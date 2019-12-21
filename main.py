@@ -19,6 +19,9 @@ def printInstruction(instruction):
     else:
         print('Zmiana dźwięku na', parameter)
 
+def noteDuration(bpm, note):
+    return 60 / note / bpm
+
 def main():
     try:
         if len(sys.argv) != 2:
@@ -26,13 +29,19 @@ def main():
 
         klpFilename = sys.argv[1]
         klpParser = parser.Parser(klpFilename)
-
+        klpParser.bpm = 35 # ZMIENIĆ
         print(f'Odtwarzanie pliku {klpFilename}')
         print(f'Tempo: {klpParser.bpm} BPM')
-
+        
+        sound = player.Sound('assets/0.mp3')
+        
         while True:
             instruction = klpParser.readInstruction()
             printInstruction(instruction)
+
+            if instruction[0] == parser.Instruction.note:
+                sound.play()
+            time.sleep(noteDuration(klpParser.bpm, instruction[1]))
 
 
     except AppIncorrectUsageError as error:
