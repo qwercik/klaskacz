@@ -37,7 +37,7 @@ def main():
         
         while True:
             instruction = klpParser.readInstruction()
-            printInstruction(instruction)
+            # DBG: printInstruction(instruction)
 
             if instruction[0] == parser.Instruction.note:
                 sound.play()
